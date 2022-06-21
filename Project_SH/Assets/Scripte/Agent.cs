@@ -28,7 +28,7 @@ public class Agent : MonoBehaviour {
             //每物理帧更新速度
             var node = Map.Instance.MapArray[(int) (transform.position.x * 10), (int) (transform.position.z * 10)];
             node.Vec.Normalize();
-            rig.velocity = new Vector3(node.Vec.x * 1,0,node.Vec.y * 1);
+            rig.velocity = new Vector3(node.Vec.x * 5,0,-node.Vec.y * 5);
         }
 
     }

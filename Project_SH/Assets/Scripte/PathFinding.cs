@@ -52,6 +52,7 @@ public class PathFinding : MonoBehaviour
         queue.Enqueue(startNode);
         startNode.Distance = 0;
         int count = 0;
+
         while (queue.Count > 0) {
             count++;
             var node = queue.Dequeue();
@@ -65,6 +66,7 @@ public class PathFinding : MonoBehaviour
                 }
                 var nextNode = Map.Instance.MapArray[nextX , nextY];
                 if (nextNode.FindingTimes >= FindingTimes || nextNode.CanPass == false) {
+
                     continue;
                 }
 
@@ -109,20 +111,22 @@ public class PathFinding : MonoBehaviour
                 }
 
                 if (j - 1 >= 0 && j + 1 < 1000) {
-                    var leftNode = Map.Instance.MapArray[i, j + 1];
-                    var rightNode = Map.Instance.MapArray[i, j - 1];
-                    if (leftNode.CanPass && rightNode.CanPass) {
-                        node.Vec.y = leftNode.Distance - rightNode.Distance;
+                    var upNode = Map.Instance.MapArray[i, j + 1];
+                    var downNode = Map.Instance.MapArray[i, j - 1];
+                    if (upNode.CanPass && downNode.CanPass) {
+                        node.Vec.y = upNode.Distance - downNode.Distance;
                     }
-                    else if (!leftNode.CanPass) {
-                        node.Vec.y = node.Distance - rightNode.Distance;
+                    else if (!upNode.CanPass) {
+                        node.Vec.y = node.Distance - downNode.Distance;
+                    }else if (!downNode.CanPass) {
+                        node.Vec.y = upNode.Distance - node.Distance;
                     }
 
                 }
                 else if (j - 1 < 0) {
-                    var leftNode = Map.Instance.MapArray[i, j + 1];
-                    if (leftNode.CanPass) {
-                        node.Vec.y = leftNode.Distance - node.Distance ;
+                    var upNode = Map.Instance.MapArray[i, j + 1];
+                    if (upNode.CanPass) {
+                        node.Vec.y = upNode.Distance - node.Distance ;
                     }
                     else {
                         node.Vec.y = 0;
@@ -130,9 +134,9 @@ public class PathFinding : MonoBehaviour
 
                 }
                 else if (j + 1 >= 1000) {
-                    var leftNode = Map.Instance.MapArray[i, j - 1];
-                    if (leftNode.CanPass) {
-                        node.Vec.y = node.Distance - leftNode.Distance ;
+                    var downNode = Map.Instance.MapArray[i, j - 1];
+                    if (downNode.CanPass) {
+                        node.Vec.y = node.Distance - downNode.Distance ;
                     }
                     else {
                         node.Vec.y = 0;

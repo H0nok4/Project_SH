@@ -41,6 +41,7 @@ public class Map : MonoBehaviour
         sw.Stop();
         Debug.Log("创建地图完成");
         Debug.Log($"创建地图花了:{sw.Elapsed}");
+
     }
 
     void Start()
@@ -54,27 +55,27 @@ public class Map : MonoBehaviour
     public Node[,] CreatMap() {
         var mapArray = new Node[1000, 1000];
         Vector3 pos = new Vector3();
-        
+        int count = 0;
         for (int i = 0; i < 1000; i += 1) {
             for (int j = 0; j < 1000; j += 1) {
-                
+                pos.x = i * 0.1f;
+                pos.y = 0;
+                pos.z = j * 0.1f;
                 mapArray[i, j] = new Node();
                 mapArray[i, j].x = i;
                 mapArray[i, j].y = j;
                 mapArray[i, j].CanPass = true;
-                var overLap = Physics.OverlapSphere(pos, 0.05f);
+                var overLap = Physics.OverlapSphere(pos, 1.5f);
                 foreach (var collider in overLap) {
                     if (collider.CompareTag("CantPass")) {
+                        count++;
                         mapArray[i, j].CanPass = false;
-                        break;
-                    }
-                    else {
-                        mapArray[i, j].CanPass = true;
                         break;
                     }
                 }
             }
         }
+        Debug.Log($"有{count}个不能行走的格子");
 
         return mapArray; 
     }
