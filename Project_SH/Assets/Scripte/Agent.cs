@@ -1,35 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class Agent : MonoBehaviour {
-    private Rigidbody rig;
+//public class Agent : MonoBehaviour {
+//    private Rigidbody rig;
 
-    public List<Vector3> MoveVec = new List<Vector3>() {
-        new Vector3(-1,0, 0),
-        new Vector3(-1,0, 1),
-        new Vector3(0,0, 1),
-        new Vector3(1,0, 1),
-        new Vector3(1,0, 0),
-        new Vector3(1,0, -1),
-        new Vector3(0,0, -1),
-        new Vector3(-1,0, -1)
-    };
+//    public List<Vector3> MoveVec = new List<Vector3>() {
+//        new Vector3(-1,0, 0),
+//        new Vector3(-1,0, 1),
+//        new Vector3(0,0, 1),
+//        new Vector3(1,0, 1),
+//        new Vector3(1,0, 0),
+//        new Vector3(1,0, -1),
+//        new Vector3(0,0, -1),
+//        new Vector3(-1,0, -1)
+//    };
 
-    void Awake() {
-        rig = GetComponent<Rigidbody>();
-    }
-    void Update() {
-        //Ã¿Ãë¸ü
-    }
+//    void Awake() {
+//        rig = GetComponent<Rigidbody>();
+//    }
+//    void Update() {
+//        //æ¯ç§’æ›´
+//    }
 
-    void FixedUpdate() {
-        if (PathFinding.Instance.CanMove) {
-            //Ã¿ÎïÀíÖ¡¸üĞÂËÙ¶È
-            var node = Map.Instance.MapArray[(int) (transform.position.x * 10), (int) (transform.position.z * 10)];
-            node.Vec.Normalize();
-            rig.velocity = new Vector3(node.Vec.x * 5,0,-node.Vec.y * 5);
-        }
+//    void FixedUpdate() {
+//        if (PathFinding.Instance.CanMove) {
+//            //æ¯ç‰©ç†å¸§æ›´æ–°é€Ÿåº¦
+//            var node = Map.Instance.MapArray[(int) (transform.position.x * 10), (int) (transform.position.z * 10)];
+//            if(node.CanPass && node.Vec != Vector2.zero) {
+//                node.Vec.Normalize();
+//                rig.velocity = new Vector3(node.Vec.x * 10, 0, node.Vec.y * 10);
+//            }
 
-    }
-}
+//            //TODO:è¿˜éœ€è¦ä¸è¦é è¿‘å¢™å£
+
+//        }
+
+//    }
+//}
