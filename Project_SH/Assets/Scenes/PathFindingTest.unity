@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146028743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.587, y: 0, z: 0}
+  m_LocalPosition: {x: 5.587, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -424,26 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f34d76f7b417e1438318d784eca1c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanMove: 0
-  Player: {fileID: 0}
-  MoveVec:
-  - {x: -1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
-  - {x: 1, y: 0, z: 1}
-  - {x: 1, y: 0, z: 0}
-  - {x: 1, y: 0, z: -1}
-  - {x: 0, y: 0, z: -1}
-  - {x: -1, y: 0, z: -1}
-  go:
-  - {fileID: 5563401918396274185, guid: 7749ee8e92bab4343935964682802c4e, type: 3}
-  - {fileID: 3862552910645620222, guid: 3c2867bb52957414ab2f78045b3122a2, type: 3}
-  - {fileID: 3863130526932390375, guid: 657ecbd73cb9486469e37b2b7099e506, type: 3}
-  - {fileID: 2675286237941133202, guid: d5900d48682de90409972121eb8dea46, type: 3}
-  - {fileID: 6882279490154921988, guid: 66041d9d8b7ecc146b4e28cb5ee8b34d, type: 3}
-  - {fileID: 1464116052671454667, guid: 0977ccdf947c34143810cd114cbb7334, type: 3}
-  - {fileID: 7054216089645324210, guid: 948761eb0193e7842a486bc26e02fc8e, type: 3}
-  - {fileID: 8821109322112743434, guid: 8402ce4467ac3f04abb58f0a42fe8db6, type: 3}
 --- !u!1 &578404941
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +945,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 1297448825}
+  Width: 10
+  Height: 10
 --- !u!1 &2094010539
 GameObject:
   m_ObjectHideFlags: 0

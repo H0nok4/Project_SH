@@ -48,33 +48,33 @@ public class GridGenerator : MonoBehaviour {
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
 
-        for (int x = 1; x < Width - 1; x++) {
-            for (int z = 1; z < Width - 1; z++) {
+        for (int x = 1; x < Width; x++) {
+            for (int z = 1; z < Width; z++) {
                 for (int y = 0; y < Height - 1; y++) {
-                    if (map.Blocks[x,z,y] != BlockType.Air) {
-                        Vector3 blockPos = new Vector3(x, z, y);
+                    if (map.Blocks[x,y,z] != BlockType.Air) {
+                        Vector3 blockPos = new Vector3(x, y, z);
                         int numFaces = 0;
-                        if (map.Blocks[x, z, y + 1] == BlockType.Air) {
+                        if (map.Blocks[x, y + 1, z] == BlockType.Air) {
                             //上方
-                            verts.Add(blockPos + new Vector3(0, 0, 1));
+                            verts.Add(blockPos + new Vector3(0, 1, 0));
                             verts.Add(blockPos + new Vector3(0, 1, 1));
-                            verts.Add(blockPos + new Vector3(1, 1, 1));
-                            verts.Add(blockPos + new Vector3(1, 0, 1));
-
-                            numFaces++;
-                        }
-
-                        if (map.Blocks[x + 1, z, y] == BlockType.Air) {
-                            //右方
-                            verts.Add(blockPos + new Vector3(1, 0, 0));
-                            verts.Add(blockPos + new Vector3(1, 0, 1));
                             verts.Add(blockPos + new Vector3(1, 1, 1));
                             verts.Add(blockPos + new Vector3(1, 1, 0));
 
                             numFaces++;
                         }
 
-                        if (map.Blocks[x - 1, z, y] == BlockType.Air) {
+                        if (map.Blocks[x + 1, y, z] == BlockType.Air) {
+                            //右方
+                            verts.Add(blockPos + new Vector3(1, 0, 0));
+                            verts.Add(blockPos + new Vector3(1, 1, 0));
+                            verts.Add(blockPos + new Vector3(1, 1, 1));
+                            verts.Add(blockPos + new Vector3(1, 0, 1));
+
+                            numFaces++;
+                        }
+
+                        if (map.Blocks[x - 1, y, z] == BlockType.Air) {
                             //左方
                             verts.Add(blockPos + new Vector3(0, 0, 0));
                             verts.Add(blockPos + new Vector3(0, 0, 1));
@@ -84,35 +84,35 @@ public class GridGenerator : MonoBehaviour {
                             numFaces++;
                         }
 
-                        if (map.Blocks[x, z + 1, y] == BlockType.Air) {
-                            //前方
-                            verts.Add(blockPos + new Vector3(0, 1, 0));
-                            verts.Add(blockPos + new Vector3(0, 1, 1));
-                            verts.Add(blockPos + new Vector3(1, 1, 1));
-                            verts.Add(blockPos + new Vector3(1, 1, 0));
+                        //if (map.Blocks[x, z + 1, y] == BlockType.Air) {
+                        //    //前方
+                        //    verts.Add(blockPos + new Vector3(0, 1, 0));
+                        //    verts.Add(blockPos + new Vector3(0, 1, 1));
+                        //    verts.Add(blockPos + new Vector3(1, 1, 1));
+                        //    verts.Add(blockPos + new Vector3(1, 1, 0));
 
-                            numFaces++;
-                        }
+                        //    numFaces++;
+                        //}
 
-                        if (map.Blocks[x, z - 1, y] == BlockType.Air) {
-                            //前方
-                            verts.Add(blockPos + new Vector3(0, 0, 0));
-                            verts.Add(blockPos + new Vector3(0, 0, 1));
-                            verts.Add(blockPos + new Vector3(1, 0, 1));
-                            verts.Add(blockPos + new Vector3(1, 0, 0));
+                        //if (map.Blocks[x, z - 1, y] == BlockType.Air) {
+                        //    //前方
+                        //    verts.Add(blockPos + new Vector3(0, 0, 0));
+                        //    verts.Add(blockPos + new Vector3(0, 0, 1));
+                        //    verts.Add(blockPos + new Vector3(1, 0, 1));
+                        //    verts.Add(blockPos + new Vector3(1, 0, 0));
 
-                            numFaces++;
-                        }
+                        //    numFaces++;
+                        //}
 
-                        if (y == 0) {
-                            //下方
-                            verts.Add(blockPos + new Vector3(0, 0, 0));
-                            verts.Add(blockPos + new Vector3(0, 1, 0));
-                            verts.Add(blockPos + new Vector3(1, 1, 0));
-                            verts.Add(blockPos + new Vector3(1, 0, 0));
+                        //if (y == 0) {
+                        //    //下方
+                        //    verts.Add(blockPos + new Vector3(0, 0, 0));
+                        //    verts.Add(blockPos + new Vector3(0, 1, 0));
+                        //    verts.Add(blockPos + new Vector3(1, 1, 0));
+                        //    verts.Add(blockPos + new Vector3(1, 0, 0));
 
-                            numFaces++;
-                        }
+                        //    numFaces++;
+                        //}
 
                         int tl = verts.Count - 4 * numFaces;
                         for (int i = 0; i < numFaces; i++) {
