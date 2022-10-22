@@ -25,13 +25,14 @@ public class Map : MonoBehaviour {
     public BlockType[,,] Blocks;
     
     public Map(int maxX, int maxZ, int maxY) {
-        var offset = Random.Range(0f, 1f);
+
         Blocks = new BlockType[maxX + 2, maxY + 1, maxZ + 2];
+        //var offset = Random.Range(0f, 1f);
         for (int i = 1; i < maxX ; i++) {
             for (int j = 1; j < maxZ; j++) {
-                float x = (i / (float)maxX + offset) % 1;
-                float y = (j / (float)maxY + offset) % 1;
-                var perlin = Mathf.PerlinNoise(x, y);
+                //float x = Mathf.Clamp01(i / (float)maxX + offset);  
+                //float y = Mathf.Clamp01(j / (float)maxZ + offset);
+                var perlin = Mathf.PerlinNoise(Random.Range(0f, 1f), Random.Range(0f, 1f));
                 var height = (int) (perlin * maxY);
                 for (int k = 0; k < height; k++) {
                     Blocks[i, k, j] = BlockType.Default;

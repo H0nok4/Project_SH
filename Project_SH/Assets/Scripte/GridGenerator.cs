@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour {
     public GameObject obj;
 
-    public int Width = 10;
+    public int Width = 100;
 
     public int Height = 10;
 
@@ -84,35 +84,35 @@ public class GridGenerator : MonoBehaviour {
                             numFaces++;
                         }
 
-                        //if (map.Blocks[x, z + 1, y] == BlockType.Air) {
-                        //    //前方
-                        //    verts.Add(blockPos + new Vector3(0, 1, 0));
-                        //    verts.Add(blockPos + new Vector3(0, 1, 1));
-                        //    verts.Add(blockPos + new Vector3(1, 1, 1));
-                        //    verts.Add(blockPos + new Vector3(1, 1, 0));
+                        if (map.Blocks[x, y, z + 1] == BlockType.Air) {
+                            //前方
+                            verts.Add(blockPos + new Vector3(0, 0, 1));
+                            verts.Add(blockPos + new Vector3(1, 0, 1));
+                            verts.Add(blockPos + new Vector3(1, 1, 1));
+                            verts.Add(blockPos + new Vector3(0, 1, 1));
 
-                        //    numFaces++;
-                        //}
+                            numFaces++;
+                        }
 
-                        //if (map.Blocks[x, z - 1, y] == BlockType.Air) {
-                        //    //前方
-                        //    verts.Add(blockPos + new Vector3(0, 0, 0));
-                        //    verts.Add(blockPos + new Vector3(0, 0, 1));
-                        //    verts.Add(blockPos + new Vector3(1, 0, 1));
-                        //    verts.Add(blockPos + new Vector3(1, 0, 0));
+                        if (map.Blocks[x, y , z - 1] == BlockType.Air) {
+                            //前方
+                            verts.Add(blockPos + new Vector3(0, 0, 0));
+                            verts.Add(blockPos + new Vector3(0, 1, 0));
+                            verts.Add(blockPos + new Vector3(1, 1, 0));
+                            verts.Add(blockPos + new Vector3(1, 0, 0));
 
-                        //    numFaces++;
-                        //}
+                            numFaces++;
+                        }
 
-                        //if (y == 0) {
-                        //    //下方
-                        //    verts.Add(blockPos + new Vector3(0, 0, 0));
-                        //    verts.Add(blockPos + new Vector3(0, 1, 0));
-                        //    verts.Add(blockPos + new Vector3(1, 1, 0));
-                        //    verts.Add(blockPos + new Vector3(1, 0, 0));
+                        if (y == 0) {
+                            //下方
+                            verts.Add(blockPos + new Vector3(0, 0, 0));
+                            verts.Add(blockPos + new Vector3(1, 0, 0));
+                            verts.Add(blockPos + new Vector3(1, 0, 1));
+                            verts.Add(blockPos + new Vector3(0, 0, 1));
 
-                        //    numFaces++;
-                        //}
+                            numFaces++;
+                        }
 
                         int tl = verts.Count - 4 * numFaces;
                         for (int i = 0; i < numFaces; i++) {
