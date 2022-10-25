@@ -35,10 +35,11 @@ public class GridGenerator : MonoBehaviour {
         Map map = new Map(Width,Width,Height);
 
         var mesh = BuildMesh(map);
-        var filter = obj.AddComponent<MeshFilter>();
-        var render = obj.AddComponent<MeshRenderer>();
+        var gameobject = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+        var filter = gameobject.GetComponent<MeshFilter>();
+        var render = gameobject.GetComponent<MeshRenderer>();
         filter.mesh = mesh;
-
+        
 
     }
 
@@ -47,6 +48,7 @@ public class GridGenerator : MonoBehaviour {
 
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
 
         for (int x = 1; x < Width; x++) {
             for (int z = 1; z < Width; z++) {
@@ -62,6 +64,7 @@ public class GridGenerator : MonoBehaviour {
                             verts.Add(blockPos + new Vector3(1, 1, 0));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].TopPos.GetUVs());
                         }
 
                         if (map.Blocks[x + 1, y, z] == BlockType.Air) {
@@ -72,6 +75,7 @@ public class GridGenerator : MonoBehaviour {
                             verts.Add(blockPos + new Vector3(1, 0, 1));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
                         }
 
                         if (map.Blocks[x - 1, y, z] == BlockType.Air) {
@@ -82,6 +86,7 @@ public class GridGenerator : MonoBehaviour {
                             verts.Add(blockPos + new Vector3(0, 1, 0));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
                         }
 
                         if (map.Blocks[x, y, z + 1] == BlockType.Air) {
@@ -92,16 +97,18 @@ public class GridGenerator : MonoBehaviour {
                             verts.Add(blockPos + new Vector3(0, 1, 1));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
                         }
 
                         if (map.Blocks[x, y , z - 1] == BlockType.Air) {
                             //前方
-                            verts.Add(blockPos + new Vector3(0, 0, 0));
                             verts.Add(blockPos + new Vector3(0, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 0, 0));
+                            verts.Add(blockPos + new Vector3(0, 0, 0));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
                         }
 
                         if (y == 0) {
@@ -112,6 +119,7 @@ public class GridGenerator : MonoBehaviour {
                             verts.Add(blockPos + new Vector3(0, 0, 1));
 
                             numFaces++;
+                            uvs.AddRange(Block.Blocks[BlockType.Default].BottomPos.GetUVs());
                         }
 
                         int tl = verts.Count - 4 * numFaces;
@@ -126,6 +134,7 @@ public class GridGenerator : MonoBehaviour {
 
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
+        mesh.uv = uvs.ToArray();
 
         mesh.RecalculateNormals();
 
