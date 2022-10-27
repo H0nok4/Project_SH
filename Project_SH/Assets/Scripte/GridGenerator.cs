@@ -80,10 +80,10 @@ public class GridGenerator : MonoBehaviour {
 
                         if (map.Blocks[x - 1, y, z] == BlockType.Air) {
                             //左方
-                            verts.Add(blockPos + new Vector3(0, 0, 0));
                             verts.Add(blockPos + new Vector3(0, 0, 1));
                             verts.Add(blockPos + new Vector3(0, 1, 1));
                             verts.Add(blockPos + new Vector3(0, 1, 0));
+                            verts.Add(blockPos + new Vector3(0, 0, 0));
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -91,10 +91,10 @@ public class GridGenerator : MonoBehaviour {
 
                         if (map.Blocks[x, y, z + 1] == BlockType.Air) {
                             //前方
-                            verts.Add(blockPos + new Vector3(0, 0, 1));
                             verts.Add(blockPos + new Vector3(1, 0, 1));
                             verts.Add(blockPos + new Vector3(1, 1, 1));
                             verts.Add(blockPos + new Vector3(0, 1, 1));
+                            verts.Add(blockPos + new Vector3(0, 0, 1));
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -102,10 +102,10 @@ public class GridGenerator : MonoBehaviour {
 
                         if (map.Blocks[x, y , z - 1] == BlockType.Air) {
                             //前方
+                            verts.Add(blockPos + new Vector3(0, 0, 0));
                             verts.Add(blockPos + new Vector3(0, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 0, 0));
-                            verts.Add(blockPos + new Vector3(0, 0, 0));
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
