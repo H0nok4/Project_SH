@@ -1,12 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using Newtonsoft.Json;
-using System.IO;
-using System.Text;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public enum Direction {
