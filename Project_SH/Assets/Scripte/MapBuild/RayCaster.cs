@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class RayCaster : MonoBehaviour
@@ -35,7 +36,11 @@ public class RayCaster : MonoBehaviour
             return false;
         }
 
-        var ray = Camera.current.ScreenPointToRay(Input.mousePosition);
+        if (Camera == null) {
+            return false;
+        }
+
+        var ray = Camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         var getHits = Physics.RaycastAll(ray, 1000f);
 
@@ -49,7 +54,10 @@ public class RayCaster : MonoBehaviour
                 continue;
             }
 
-            _point = raycastHit.point;
+
+            _point.x = (int) raycastHit.point.x;
+            _point.y = (int) raycastHit.point.y;
+            _point.z = (int) raycastHit.point.z;
             return true;
         }
 

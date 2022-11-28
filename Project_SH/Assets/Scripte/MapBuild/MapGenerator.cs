@@ -10,23 +10,34 @@ namespace MapBuild
         private float _time = 0.1f;
         public MapGeneratorType CurGeneratorType;
 
+        //TODO:需要一个统一管理的资源
+        public GameObject Block;
+        public GameObject BlockPrefab;
+
+        private IMapGeneratorMode Mode;
+
         private void Start()
         {
-            CurGeneratorType = MapGeneratorType.Move;
+            CurGeneratorType = MapGeneratorType.DrawTile;
+            Mode = new DrawMode();
         }
 
         private void Update() {
             //每一帧检测镜头到鼠标的一条射线，找到第一个碰撞到的面，根据当前的模式来等待执行
             _time += Time.deltaTime;
             while (_time >= _interval) {
-                CheckMousePosition();
+                _time -= _interval;
+                Show(Mode);
+                Run(Mode);
             }
         }
 
-        public void CheckMousePosition() {
-            if (Find.RayCaster.HasPoint) {
-                Debug.Log($"当前有碰撞点 Point = {Find.RayCaster.Point}");
-            }
+        public void Run(IMapGeneratorMode mode) {
+            mode.Run();
+        }
+
+        public void Show(IMapGeneratorMode mode) {
+            mode.Show();
         }
     }
 
