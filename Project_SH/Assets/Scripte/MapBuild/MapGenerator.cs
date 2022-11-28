@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace MapBuild
 {
-    public class MapGenerator : MonoBehaviour
-    {
-
+    public class MapGenerator : MonoBehaviour {
+        private float _interval = 0.1f;
+        private float _time = 0.1f;
         public MapGeneratorType CurGeneratorType;
 
         private void Start()
@@ -16,8 +16,17 @@ namespace MapBuild
         }
 
         private void Update() {
-            //Ã¿Ò»Ö¡¼ì²â¾µÍ·µ½Êó±êµÄÒ»ÌõÉäÏß£¬ÕÒµ½µÚÒ»¸öÅö×²µ½µÄÃæ£¬¸ù¾İµ±Ç°µÄÄ£Ê½À´µÈ´ıÖ´ĞĞ
+            //æ¯ä¸€å¸§æ£€æµ‹é•œå¤´åˆ°é¼ æ ‡çš„ä¸€æ¡å°„çº¿ï¼Œæ‰¾åˆ°ç¬¬ä¸€ä¸ªç¢°æ’åˆ°çš„é¢ï¼Œæ ¹æ®å½“å‰çš„æ¨¡å¼æ¥ç­‰å¾…æ‰§è¡Œ
+            _time += Time.deltaTime;
+            while (_time >= _interval) {
+                CheckMousePosition();
+            }
+        }
 
+        public void CheckMousePosition() {
+            if (Find.RayCaster.HasPoint) {
+                Debug.Log($"å½“å‰æœ‰ç¢°æ’ç‚¹ Point = {Find.RayCaster.Point}");
+            }
         }
     }
 
