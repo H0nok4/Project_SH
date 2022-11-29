@@ -74,5 +74,7 @@ crashlytics-build.properties
 /Project_SH/Library/
 /Project_SH/Logs/
 /Project_SH/obj/Debug/
-/Project_SH/Temp
-/
+/Project_SH/Temp/
+/Project_SH/Packages/
+/Project_SH/ProjectSettings/
+/Project_SH/UserSetting/
