@@ -16,10 +16,14 @@ namespace MapBuild
 
         private IMapGeneratorMode Mode;
 
+        public Map Map;
+        public GameObject MapObject;
+
         private void Start()
         {
             CurGeneratorType = MapGeneratorType.DrawTile;
             Mode = new DrawMode();
+            Map = new Map(10, 10, 10);
         }
 
         private void Update() {
@@ -40,5 +44,4 @@ namespace MapBuild
             mode.Show();
         }
     }
-
 }

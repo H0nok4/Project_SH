@@ -19,83 +19,9 @@ public class Map : MonoBehaviour {
     public Map(int maxX, int maxZ, int maxY) {
 
         Blocks = new BlockType[maxX + 2, maxY + 1, maxZ + 2];
-        //var offset = Random.Range(0f, 1f);
-        for (int i = 1; i < maxX ; i++) {
-            for (int j = 1; j < maxZ; j++) {
-                //float x = Mathf.Clamp01(i / (float)maxX + offset);  
-                //float y = Mathf.Clamp01(j / (float)maxZ + offset);
-                var perlin = Mathf.PerlinNoise(Random.Range(0f, 1f), Random.Range(0f, 1f));
-                var height = (int) (perlin * maxY);
-                for (int k = 0; k < height; k++) {
-                    Blocks[i, k, j] = BlockType.Default;
-                }
-            }
-        }
+
     }
-    //// Start is called before the first frame update
-    //public Node[,] MapArray;
 
-    //public static Map Instance;
-
-
-    //void Awake() {
-    //    if (Instance == null) {
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else {
-    //        Destroy(gameObject);
-    //    }
-    //    Stopwatch sw = new Stopwatch();
-    //    sw.Start();
-    //    MapArray = CreatMap();
-    //    sw.Stop();
-    //    Debug.Log("创建地图完成");
-    //    Debug.Log($"创建地图花了:{sw.Elapsed}");
-
-    //}
-
-    //void Start()
-    //{
-
-
-
-
-    //}
-
-    //public Node[,] CreatMap() {
-    //    var mapArray = new Node[1000, 1000];
-    //    Vector3 pos = new Vector3();
-    //    int count = 0;
-    //    for (int i = 0; i < 1000; i += 1) {
-    //        for (int j = 0; j < 1000; j += 1) {
-    //            pos.x = i * 0.1f;
-    //            pos.y = 0;
-    //            pos.z = j * 0.1f;
-    //            mapArray[i, j] = new Node();
-    //            mapArray[i, j].x = i;
-    //            mapArray[i, j].y = j;
-    //            mapArray[i, j].CanPass = true;
-    //            var overLap = Physics.OverlapSphere(pos, 1f);
-    //            foreach (var collider in overLap) {
-    //                if (collider.CompareTag("CantPass")) {
-    //                    count++;
-    //                    mapArray[i, j].CanPass = false;
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    Debug.Log($"有{count}个不能行走的格子");
-
-    //    return mapArray; 
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 }
 
 public class Node {

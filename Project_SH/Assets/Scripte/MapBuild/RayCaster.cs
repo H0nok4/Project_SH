@@ -48,16 +48,17 @@ public class RayCaster : MonoBehaviour
             return false;
         }
 
-        foreach (var raycastHit in getHits) {
-            var gameObject = raycastHit.collider.gameObject;
-            if (!gameObject.name.StartsWith("Plane")) {
+        Debug.Log($"总共碰撞了{getHits.Length}个");
+        for (int i = getHits.Length- 1; i >= 0; i--) {
+            var gameObject = getHits[i].collider.gameObject;
+            if (!gameObject.tag.StartsWith("Map")) {
                 continue;
             }
 
 
-            _point.x = (int) raycastHit.point.x;
-            _point.y = (int) raycastHit.point.y;
-            _point.z = (int) raycastHit.point.z;
+            _point.x = (int) (getHits[i].point.x - 0.5f);
+            _point.y = (int) (getHits[i].point.y );
+            _point.z = (int) (getHits[i].point.z - 0.5f);
             return true;
         }
 
