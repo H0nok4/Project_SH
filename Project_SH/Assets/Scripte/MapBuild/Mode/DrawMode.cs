@@ -10,7 +10,10 @@ public class DrawMode : IMapGeneratorMode
             Debug.Log($"生成一个方块网格在 {Find.RayCaster.Point}");
             if (Find.RayCaster.HasPoint) {
                 var point = Find.RayCaster.Point;
-                Find.MapGenerator.Map.Blocks[(int) point.x, (int) point.y, (int) point.z] = BlockType.Default;
+                var normal = Find.RayCaster.Normal;
+                var pos = new Vector3(point.x + (normal.x*0.5f),point.y,point.z + (normal.z*0.5f));
+
+                Find.MapGenerator.Map.Blocks[Mathf.FloorToInt(pos.x) , (int)pos.y, Mathf.FloorToInt(pos.z)] = BlockType.Default;
                 var mesh = GridGenerator.BuildMesh(Find.MapGenerator.Map);
                 var meshCom = Find.MapGenerator.MapObject.GetComponent<MeshFilter>();
                 meshCom.mesh = mesh;

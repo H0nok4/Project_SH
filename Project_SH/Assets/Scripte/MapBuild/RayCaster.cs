@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
@@ -12,6 +13,7 @@ public class RayCaster : MonoBehaviour
     }
 
     private Vector3 _point;
+    private Vector3 _normal;
     private bool _hasPoint;
 
     public Vector3 Point {
@@ -23,6 +25,12 @@ public class RayCaster : MonoBehaviour
     public bool HasPoint {
         get {
             return _hasPoint;
+        }
+    }
+
+    public Vector3 Normal {
+        get {
+            return _normal;
         }
     }
 
@@ -48,17 +56,18 @@ public class RayCaster : MonoBehaviour
             return false;
         }
 
-        Debug.Log($"总共碰撞了{getHits.Length}个");
         for (int i = getHits.Length- 1; i >= 0; i--) {
             var gameObject = getHits[i].collider.gameObject;
             if (!gameObject.tag.StartsWith("Map")) {
                 continue;
             }
 
-
-            _point.x = (int) (getHits[i].point.x - 0.5f);
-            _point.y = (int) (getHits[i].point.y );
-            _point.z = (int) (getHits[i].point.z - 0.5f);
+            _normal.x = getHits[i].normal.x;
+            _normal.y = getHits[i].normal.y;
+            _normal.z = getHits[i].normal.z;
+            _point.x = Mathf.FloorToInt(getHits[i].point.x);
+            _point.y = Mathf.FloorToInt(getHits[i].point.y + 0.001f);
+            _point.z = Mathf.FloorToInt(getHits[i].point.z);
             return true;
         }
 
