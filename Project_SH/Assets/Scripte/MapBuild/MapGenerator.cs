@@ -8,7 +8,17 @@ namespace MapBuild
     public class MapGenerator : MonoBehaviour {
         private float _interval = 0.1f;
         private float _time = 0.1f;
-        public MapGeneratorType CurGeneratorType;
+
+        private MapGeneratorType _curGeneratorType;
+        public MapGeneratorType CurGeneratorType {
+            get {
+                return _curGeneratorType;
+            }
+            set {
+                _curGeneratorType = value;
+                Mode = GetMapGeneratorModeByType(value);
+            }
+        }
 
         //TODO:需要一个统一管理的资源
         public GameObject Block;
@@ -37,11 +47,22 @@ namespace MapBuild
         }
 
         public void Run(IMapGeneratorMode mode) {
-            mode.Run();
+            mode?.Run();
         }
 
         public void Show(IMapGeneratorMode mode) {
-            mode.Show();
+            mode?.Show();
+        }
+
+        private IMapGeneratorMode GetMapGeneratorModeByType(MapGeneratorType type) {
+            switch (type) {
+                case MapGeneratorType.DrawTile:
+                    return new DrawMode();
+                case MapGeneratorType.EarseTile:
+                    return new EarseMode();
+                default:
+                    return null;
+            }
         }
     }
 }

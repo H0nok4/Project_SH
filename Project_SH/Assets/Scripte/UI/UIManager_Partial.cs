@@ -4,5 +4,5 @@ using UnityEngine;
 
 public partial class UIManager
 {
-    [SerializeField] public static GameObject[] Views;
+
 }

@@ -7,7 +7,6 @@ public class DrawMode : IMapGeneratorMode
     public void Run() {
         //TODO:点击按键时，在鼠标的位置生成一个Block
         if (Input.GetKey(KeyCode.Mouse0)) {
-            Debug.Log($"生成一个方块网格在 {Find.RayCaster.Point}");
             if (Find.RayCaster.HasPoint) {
                 var point = Find.RayCaster.Point;
                 var normal = Find.RayCaster.Normal;
@@ -22,7 +21,6 @@ public class DrawMode : IMapGeneratorMode
                 collider.sharedMesh = mesh;
                 collider.material = new PhysicMaterial();
             }
-
         }
     }
 

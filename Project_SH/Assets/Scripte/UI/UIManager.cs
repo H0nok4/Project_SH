@@ -6,19 +6,20 @@ using UnityEngine;
 [Serializable]
 public partial class UIManager : MonoBehaviour
 {
+    [SerializeField] public static GameObject[] Views;
     public List<UIBaseView> OpenList = new List<UIBaseView>();
     public static bool ShowUI<T>(int id) where T : UIBaseView,new()
     {
         if (Views.Length < id)
         {
-            Debug.LogError($"UIID出错，比实际View数量大，id={id}");
+            Debug.LogError($"UIID鍑洪敊锛屾瘮瀹為檯View鏁伴噺澶э紝id={id}");
             return false;
         }
 
         var view = CreatViewInstance<T>(Views[id]);
         if (view is null)
         {
-            Debug.LogError($"创建View失败，没有获取到View组件");
+            Debug.LogError($"鍒涘缓View澶辫触锛屾病鏈夎幏鍙栧埌View缁勪欢");
             return false;
         }
 

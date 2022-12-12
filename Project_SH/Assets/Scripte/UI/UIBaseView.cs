@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+[Serializable]
 public class UIBaseView
 {
     public GameObject Instance;
