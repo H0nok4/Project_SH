@@ -13,16 +13,13 @@ public class DrawMode : IMapGeneratorMode
                 var pos = new Vector3(point.x + (normal.x*0.5f),point.y,point.z + (normal.z*0.5f));
 
                 Find.MapGenerator.Map.Blocks[Mathf.FloorToInt(pos.x) , (int)pos.y, Mathf.FloorToInt(pos.z)] = BlockType.Default;
-                var mesh = GridGenerator.BuildMesh(Find.MapGenerator.Map);
-                var meshCom = Find.MapGenerator.MapObject.GetComponent<MeshFilter>();
-                meshCom.mesh = mesh;
-                var collider = Find.MapGenerator.MapObject.GetComponent<MeshCollider>();
-                var meshRenderer = Find.MapGenerator.MapObject.GetComponent<MeshRenderer>();
-                collider.sharedMesh = mesh;
-                collider.material = new PhysicMaterial();
+
+                Find.MapGenerator.RefreshMesh();
             }
         }
     }
+
+
 
     public void Show() {
         //TODO:显示预览
@@ -44,6 +41,8 @@ public class DrawMode : IMapGeneratorMode
 
             Find.MapGenerator.Block.SetActive(false);
         }
+
+
 
     }
 }

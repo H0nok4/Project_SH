@@ -16,6 +16,7 @@ namespace MapBuild
             }
             set {
                 _curGeneratorType = value;
+                Debug.Log($"当前GeneratorMode为{_curGeneratorType}");
                 Mode = GetMapGeneratorModeByType(value);
             }
         }
@@ -44,6 +45,23 @@ namespace MapBuild
                 Show(Mode);
                 Run(Mode);
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2)) {
+                Find.MapGenerator.CurGeneratorType = MapGeneratorType.EarseTile;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
+                Find.MapGenerator.CurGeneratorType = MapGeneratorType.DrawTile;
+            }
+        }
+        public void RefreshMesh() {
+            var mesh = GridGenerator.BuildMesh(Find.MapGenerator.Map);
+            var meshCom = Find.MapGenerator.MapObject.GetComponent<MeshFilter>();
+            meshCom.mesh = mesh;
+            var collider = Find.MapGenerator.MapObject.GetComponent<MeshCollider>();
+            var meshRenderer = Find.MapGenerator.MapObject.GetComponent<MeshRenderer>();
+            collider.sharedMesh = mesh;
+            collider.material = new PhysicMaterial();
         }
 
         public void Run(IMapGeneratorMode mode) {
