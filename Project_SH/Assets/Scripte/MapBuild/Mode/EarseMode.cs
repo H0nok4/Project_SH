@@ -25,12 +25,6 @@ public class EarseMode : IMapGeneratorMode
     }
 
     public void Show() {
-        if (Find.RayCaster.HasPoint) {
-            var normal = Find.RayCaster.Normal;
-            var point = Find.RayCaster.Point;
-            var pos = new Vector3(point.x - (normal.x * 0.5f), point.y - (normal.y * 0.5f), point.z - (normal.z * 0.5f));
-            Find.MapGenerator.Block.transform.position = Find.RayCaster.Point;
-        }
 
     }
 }

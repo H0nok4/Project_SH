@@ -10,6 +10,7 @@ public class GridGenerator{
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
         List<Vector2> uvs = new List<Vector2>();
+        List<Color> colors = new List<Color>();
 
         for (int x = 1; x < map.Blocks.GetLength(0); x++) {
             for (int z = 1; z < map.Blocks.GetLength(0); z++) {
