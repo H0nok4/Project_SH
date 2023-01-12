@@ -25,6 +25,15 @@ public class EarseMode : IMapGeneratorMode
     }
 
     public void Show() {
+        if (Find.RayCaster.HasPoint) {
+            var point = Find.RayCaster.Point;
+            var normal = Find.RayCaster.Normal;
+            var pos = new Vector3(point.x - (normal.x * 0.5f), point.y - (normal.y * 0.5f), point.z - (normal.z * 0.5f));
+            if (Find.MapGenerator.Map.Blocks[(int)pos.x, Math.Clamp((int)pos.y, 0, 255), (int)pos.z] != BlockType.Air) {
+                Find.MapGenerator.Map.IsRed[(int) pos.x, Math.Clamp((int) pos.y, 0, 255), (int) pos.z] = true;
+            }
 
+            Find.MapGenerator.RefreshMesh();
+        }
     }
 }

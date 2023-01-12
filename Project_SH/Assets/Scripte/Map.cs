@@ -15,11 +15,12 @@ public enum Direction {
 public class Map : MonoBehaviour {
 
     public BlockType[,,] Blocks;
+    public bool[,,] IsRed;
     
     public Map(int maxX, int maxZ, int maxY) {
 
         Blocks = new BlockType[maxX + 2, maxY + 1, maxZ + 2];
-
+        IsRed = new bool[maxX + 2, maxY + 1, maxZ + 2];
     }
 
 }

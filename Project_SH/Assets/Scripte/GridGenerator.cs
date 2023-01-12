@@ -24,6 +24,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(0, 1, 1));
                             verts.Add(blockPos + new Vector3(1, 1, 1));
                             verts.Add(blockPos + new Vector3(1, 1, 0));
+                            AddColor(map.IsRed[x,y,z]?Color.red:Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].TopPos.GetUVs());
@@ -35,6 +36,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(1, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 1, 1));
                             verts.Add(blockPos + new Vector3(1, 0, 1));
+                            AddColor(map.IsRed[x, y, z] ? Color.red : Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -46,6 +48,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(0, 1, 1));
                             verts.Add(blockPos + new Vector3(0, 1, 0));
                             verts.Add(blockPos + new Vector3(0, 0, 0));
+                            AddColor(map.IsRed[x, y, z] ? Color.red : Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -57,6 +60,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(1, 1, 1));
                             verts.Add(blockPos + new Vector3(0, 1, 1));
                             verts.Add(blockPos + new Vector3(0, 0, 1));
+                            AddColor(map.IsRed[x, y, z] ? Color.red : Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -68,6 +72,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(0, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 1, 0));
                             verts.Add(blockPos + new Vector3(1, 0, 0));
+                            AddColor(map.IsRed[x, y, z] ? Color.red : Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].SidePos.GetUVs());
@@ -79,6 +84,7 @@ public class GridGenerator{
                             verts.Add(blockPos + new Vector3(1, 0, 0));
                             verts.Add(blockPos + new Vector3(1, 0, 1));
                             verts.Add(blockPos + new Vector3(0, 0, 1));
+                            AddColor(map.IsRed[x, y, z] ? Color.red : Color.white);
 
                             numFaces++;
                             uvs.AddRange(Block.Blocks[BlockType.Default].BottomPos.GetUVs());
@@ -97,11 +103,20 @@ public class GridGenerator{
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.uv = uvs.ToArray();
+        mesh.colors = colors.ToArray();
 
         mesh.RecalculateNormals();
 
         return mesh;
+
+        void AddColor(Color color) {
+            for (int i = 0; i < 4; i++) {
+                colors.Add(color);
+            }
+        }
     }
+
+
 
 
 }
